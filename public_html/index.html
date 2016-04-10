@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>Basic Chat App</title>
+		<script type="text/javascript" src="jquery-2.2.3.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var ws = new WebSocket("ws://127.0.0.1:8081");
+				ws.onmessage = function(event) {
+					$('#chat_window').append(event.data + '<br />');
+				};
+				$('#submit_button').click(function() {
+					ws.send($('#chat_message').val());
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<p id="chat_window">
+		<input id="chat_message" type="text" />
+		<button id="submit_button">Chat</button>
+	</body>
+</html>
